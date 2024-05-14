@@ -1,0 +1,26 @@
+.container {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 5px;
+}
+
+.card {
+    width: 8rem;
+    height: 10rem;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+input{
+    width: 70vw;
+    margin-left: 15%;
+}
