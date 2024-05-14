@@ -7,11 +7,11 @@ function App() {
   const handleSearch = (e) => {
     console.log("handleSearch");
     const name = e.target.value;
-    (async()=>{
-      const res = await axios.get(`https://restcountries.com/v3.1/name/${name}`);
-      const data = await res.data;
-      setData(data);
-    })();
+    const filterData = apiData.filter(item=>{
+      return item.name.common.toLowerCase().includes(name)
+    })
+    console.log(filterData)
+    setData(filterData);
   };
 
   const debounceSearch = (e, func, delay) => {
@@ -25,10 +25,14 @@ function App() {
   useEffect(() => {
     const URL = "https://restcountries.com/v3.1/all";
     (async () => {
+     try{
       const res = await axios.get(URL);
       const data = await res.data;
       setData(data);
       console.log(data);
+     }catch(err){
+      console.log(err)
+     }
     })();
   }, []);
   return (
