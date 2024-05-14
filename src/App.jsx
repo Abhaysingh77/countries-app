@@ -7,10 +7,10 @@ function App() {
   const handleSearch = (e) => {
     console.log("handleSearch");
     const text = e.target.value;
-    const filterData = apiData.filter(item=>{
-      return item.name.common.includes(text)
-    })
-    console.log(filterData)
+    const filterData = apiData.filter((item) => {
+      return item.name.common.toLowerCase().includes(text.toLowerCase());
+    });
+    console.log(filterData);
     setData(filterData);
   };
 
@@ -25,14 +25,14 @@ function App() {
   useEffect(() => {
     const URL = "https://restcountries.com/v3.1/all";
     (async () => {
-     try{
-      const res = await axios.get(URL);
-      const data = await res.data;
-      setData(data);
-      console.log(data);
-     }catch(err){
-      console.log(err)
-     }
+      try {
+        const res = await axios.get(URL);
+        const data = await res.data;
+        setData(data);
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
     })();
   }, []);
   return (
@@ -54,7 +54,7 @@ function App() {
                 height="70px"
                 width="70px"
               />
-              <h2>{item.name.common}</h2>
+              <p>{item.name.common}</p>
             </div>
           );
         })}
