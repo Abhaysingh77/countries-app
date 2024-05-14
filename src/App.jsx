@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 function App() {
   const [apiData, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const debounceTime = useRef(null);
   const handleSearch = (e) => {
     console.log("handleSearch");
@@ -11,7 +12,7 @@ function App() {
       return item.name.common.toLowerCase().includes(text.toLowerCase());
     });
     console.log(filterData);
-    setData(filterData);
+    setFilteredData(filterData);
   };
 
   const debounceSearch = (e, func, delay) => {
@@ -45,7 +46,7 @@ function App() {
         }}
       />
       <div className="container">
-        {apiData.map((item) => {
+        {filteredData.map((item) => {
           return (
             <div className="card" key={item.cca2}>
               <img
