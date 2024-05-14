@@ -6,9 +6,9 @@ function App() {
   const debounceTime = useRef(null);
   const handleSearch = (e) => {
     console.log("handleSearch");
-    const name = e.target.value;
+    const text = e.target.value;
     const filterData = apiData.filter(item=>{
-      return item.name.common.toLowerCase().includes(name)
+      return item.name.common.includes(text)
     })
     console.log(filterData)
     setData(filterData);
@@ -54,7 +54,7 @@ function App() {
                 height="70px"
                 width="70px"
               />
-              <h4>{item.name.common}</h4>
+              <h2>{item.name.common}</h2>
             </div>
           );
         })}
