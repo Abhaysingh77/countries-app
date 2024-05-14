@@ -9,8 +9,8 @@
     margin: 5px;
 }
 
-.card {
-    width: 8rem;
+.countryCard {
+    width: 10rem;
     height: 10rem;
     text-align: center;
     border: 1px solid black;

@@ -1,17 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./App.css";
+
 function App() {
   const [apiData, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const debounceTime = useRef(null);
+
   const handleSearch = (e) => {
-    console.log("handleSearch");
-    const text = e.target.value;
+    const text = e.target.value.toLowerCase();
     const filterData = apiData.filter((item) => {
-      return item.name.common.toLowerCase().includes(text.toLowerCase());
+      return item.name.common.toLowerCase().includes(text);
     });
-    console.log(filterData);
     setFilteredData(filterData);
   };
 
@@ -23,20 +23,21 @@ function App() {
       func(e);
     }, delay);
   };
+
   useEffect(() => {
-    const URL = "https://restcountries.com/v3.1/all";
-    (async () => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get(URL);
-        const data = await res.data;
-        setData(data);
-        setFilteredData(data);
-        console.log(data);
+        const res = await axios.get("https://restcountries.com/v3.1/all");
+        setData(res.data);
+        setFilteredData(res.data);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
-    })();
+    };
+
+    fetchData();
   }, []);
+
   return (
     <>
       <input
@@ -49,7 +50,7 @@ function App() {
       <div className="container">
         {filteredData.map((item) => {
           return (
-            <div className="card" key={item.cca2}>
+            <div className="countryCard" key={item.cca2}>
               <img
                 src={item.flags.png}
                 alt={item.cca2}
