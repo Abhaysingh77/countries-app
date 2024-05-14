@@ -30,6 +30,7 @@ function App() {
         const res = await axios.get(URL);
         const data = await res.data;
         setData(data);
+        setFilteredData(data);
         console.log(data);
       } catch (err) {
         console.log(err);
